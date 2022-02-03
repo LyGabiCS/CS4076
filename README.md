@@ -9,3 +9,10 @@ Time - 3 months
 
 Week 1 Update - Create changes to the skeleton Zork code so it compiles successfuly.
                 Next Goal: Add a room to the already existing areas
+
+Week 2 Update - Completed: Created a new room in the existing map and updated it using a pull request! The file that was updated was ZorkUL.cpp
+                Goal: Add a new command word "teleport" which will move the user to a room orf choice (or random room). 
+                (The decisiion will be specified in a future comment!)
+
+
+              
