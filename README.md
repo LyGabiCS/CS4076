@@ -18,7 +18,13 @@ Week 3 Update - Update: Still working on the teleport function!
                 Completed: Begin a QT Widget project which will be the *true* beginning of the semester long project. 
                 Goal: Place a text space and push button that once clicked will send a message to the user.
        
-Week 4 Update - Rewrite the Room code so the rooms can be accessed through an array of pointers
+Week 4 Update - Goal: Rewrite the Room code so the rooms can be accessed through an array of pointers
+                In-Progress: Currently working on picking game theme and game basics
 
-Week 5 Update - Implement inline functions, c++ references, default parameters and function templates into the Zork code.
+Week 5 Update - Goal: Implement inline functions, c++ references, default parameters and function templates into the Zork code.
+                In-Progress: Trying out GUI layout variations 
+                
+Week 6 Update - This week I focused on trying to understand all the requirements that I need to include in my Zork code. I put in the time to go through C++ and see where certain things will suit the game.
+
+Week 7 Update: Back to coding, will try and improve the necessary updates from week 4 and 5
 
