@@ -17,5 +17,8 @@ Week 2 Update - Completed: Created a new room in the existing map and updated it
 Week 3 Update - Update: Still working on the teleport function!
                 Completed: Begin a QT Widget project which will be the *true* beginning of the semester long project. 
                 Goal: Place a text space and push button that once clicked will send a message to the user.
+       
+Week 4 Update - Rewrite the Room code so the rooms can be accessed through an array of pointers
 
-              
+Week 5 Update - Implement inline functions, c++ references, default parameters and function templates into the Zork code.
+
