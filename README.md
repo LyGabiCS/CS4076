@@ -25,6 +25,7 @@ Week 5 Update - Goal: Implement inline functions, c++ references, default parame
                 In-Progress: Trying out GUI layout variations 
                 
 Week 6 Update - This week I focused on trying to understand all the requirements that I need to include in my Zork code. I put in the time to go through C++ and see where certain things will suit the game.
+                Completed: Uploaded Game Document 
 
 Week 7 Update: Back to coding, will try and improve the necessary updates from week 4 and 5
 
