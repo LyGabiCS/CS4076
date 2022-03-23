@@ -6,25 +6,25 @@
 #include <iostream>
 using namespace std;
 
+// Each Item will have a name, value and rarity.
+// Name of each item will be used in the inventory section
+// Value of each item will be added up to the grand total
+// Rarity of each item will determine which wordle the player will do!
+
 class Item {
 private:
-	string description;
-	string longDescription;
-	int weightGrams;
-	float value;
-	bool weaponCheck;
+    string description;
+    int value;
+    string rarity;
 
 public:
-    Item (string description, int inWeight, float inValue);
-    Item (string description);
-	string getShortDescription();
-    string getLongDescription();
-	int getWeight();
-	void setWeight(int weightGrams);
-	float getValue();
-	void setValue(float value);
-	int getWeaponCheck();
-	void setWeaponCheck(int weaponCheck);
+    Item (string description, int value, string rarity);
+    string getShortDescription();
+    string getRarity();
+    int getWeight();
+    void setWeight(int weightGrams);
+    float getValue();
+    void setValue(int value);
 };
 
 #endif /*ITEM_H_*/
