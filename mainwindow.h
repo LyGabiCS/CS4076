@@ -2,8 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include<QPushButton>
-
+#include <string>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -16,11 +15,19 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void inputToCommand(string input);
+
+
 private slots:
-    void on_pushButton_clicked();
+    void on_North_clicked();
+
+    void on_South_clicked();
+
+    void on_East_clicked();
+
+    void on_West_clicked();
 
 private:
     Ui::MainWindow *ui;
-    QPushButton *push_button2;
 };
 #endif // MAINWINDOW_H
