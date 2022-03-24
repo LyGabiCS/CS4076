@@ -29,5 +29,5 @@ Week 6 Update - This week I focused on trying to understand all the requirements
 
 Week 7 Update: Back to coding, will try and improve the necessary updates from week 4 and 5
 
-Week 8 and 9 Update: Working on UI and improving functionality of code
+Week 8 and 9 Update: Working on UI and improving functionality of code. Really need to focus on getting all the requirements into my code. but first get the base functionality of the code to work perfectly.
 
