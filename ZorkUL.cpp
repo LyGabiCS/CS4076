@@ -1,9 +1,17 @@
 #include <iostream>
+#include "mainwindow.h"
+#include <QApplication>
 
 using namespace std;
 #include "ZorkUL.h"
 
 int main(int argc, char *argv[]) {
+
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.resize(1500, 800);
+    w.show();
+    return a.exec();
     ZorkUL temp;
     temp.play();
     return 0;
@@ -14,7 +22,7 @@ ZorkUL::ZorkUL() {
 }
 
 void ZorkUL::createRooms()  {
-    Room *a, *b, *c, *d, *e, *f, *g, *h, *i, *j, *k, *l, *m, *o, *p, *q;
+    Room *a, *b, *c, *d, *e, *f, *g, *h, *i, *j, *k, *l, *m, *n, *o, *p;
 
     a = new Room("Pond");
         a->addItem(new Item("Swiss Knife", 20, "Common"));
@@ -68,20 +76,20 @@ void ZorkUL::createRooms()  {
     m = new Room("Guards");
         m->addItem(new Item("Almdudler", 45, "Common"));
 
-    o = new Room("Red Tower");
-        o->addItem(new Item("Bayonet", 360, "Rare"));
-        o->addItem(new Item("Broken Sabre", 220, "Rare"));
-        o->addItem(new Item("Leather Gloves", 60, "Common"));
+    n = new Room("Red Tower");
+        n->addItem(new Item("Bayonet", 360, "Rare"));
+        n->addItem(new Item("Broken Sabre", 220, "Rare"));
+        n->addItem(new Item("Leather Gloves", 60, "Common"));
 
-    p = new Room("Gallery");
-        p->addItem(new Item("The Young Hare", 690, "Unique"));
-        p->addItem(new Item("Gemstone Bouquet", 990, "Unique"));
-        p->addItem(new Item("The Last Judgement", 870, "Unique"));
+    o = new Room("Gallery");
+        o->addItem(new Item("The Young Hare", 690, "Unique"));
+        o->addItem(new Item("Gemstone Bouquet", 990, "Unique"));
+        o->addItem(new Item("The Last Judgement", 870, "Unique"));
 
-    q = new Room("Black Tower");
-        q->addItem(new Item("120 Gulden Coins", 120, "Rare"));
-        q->addItem(new Item("Wine", 20, "Common"));
-        q->addItem(new Item("Bayonet", 260, "Rare"));
+    p = new Room("Black Tower");
+        p->addItem(new Item("120 Gulden Coins", 120, "Rare"));
+        p->addItem(new Item("Wine", 20, "Common"));
+        p->addItem(new Item("Bayonet", 260, "Rare"));
 
 //             (N, E, S, W)
     a->setExits(b, NULL, NULL, o);
@@ -97,16 +105,15 @@ void ZorkUL::createRooms()  {
     k->setExits(NULL,NULL, j, NULL);
     l->setExits(NULL, NULL, c, m);
     m->setExits(NULL,l, NULL, NULL);
-    o->setExits(p, a, NULL, NULL);
-    p->setExits(q, NULL, p, NULL);
-    q->setExits(NULL,NULL, p, NULL);
+    n->setExits(o, a, NULL, NULL);
+    o->setExits(p, NULL, o, NULL);
+    p->setExits(NULL,NULL, o, NULL);
 
         currentRoom = a;
 }
 
-/**
- *  Main play routine.  Loops until end of play.
- */
+//  Main play routine.  Loops until end of play.
+
 void ZorkUL::play() {
     printWelcome();
 
@@ -188,22 +195,6 @@ bool ZorkUL::processCommand(Command command) {
         }
     }
 
-    else if (commandWord.compare("drop") == 0)
-    {
-
-    }
-    /*
-    {
-    if (!command.hasSecondWord()) {
-        cout << "incomplete input"<< endl;
-        }
-        else
-            if (command.hasSecondWord()) {
-            cout << "you're adding " + command.getSecondWord() << endl;
-            itemsInRoom.push_Back;
-        }
-    }
-*/
     else if (commandWord.compare("quit") == 0) {
         if (command.hasSecondWord())
             cout << "overdefined input"<< endl;
@@ -218,7 +209,7 @@ bool ZorkUL::processCommand(Command command) {
             return true; // write a function that specifies the room details
     }
 }
-/** COMMANDS **/
+// COMMANDS
 void ZorkUL::printHelp() {
     cout << "valid inputs are; " << endl;
     parser.showCommands();
@@ -258,9 +249,6 @@ string ZorkUL::go(string direction) {
       }
   }
 
-  string ZorkUL::teleport() {
-  return currentRoom->shortDescription();
-    }
 
 
 
