@@ -14,7 +14,8 @@ using namespace std;
 // Total will be updated every time the player picks up and successfully finishes a wordle.
 
 class Item {
-private:
+
+protected:
 
     string description;
     string fullDescription;
@@ -25,14 +26,46 @@ private:
 public:
 
     Item (string description, int value, string rarity);
+//DESTRUCTOR
+    virtual ~Item();
     string getShortDescription();
     string getFullDescription();
     int getValue();
     int getTotal();
     string getRarity();
-    void setValue(int newValue);
+
+//VIRTUAL FUNCTION
+    virtual void setValue(int newValue);
     void setTotal(int newTotal);
     void sumTotal(int value);
 };
 
+//INHERITANCE
+class Common : public Item {
+
+public:
+    Common(string description, int value, string rarity);
+    void setValue(int newValue);
+
+
+};
+
+
+class Rare : public Item {
+
+public:
+    Rare(string description, int value, string rarity);
+    void setValue(int newValue);
+
+};
+
+
+class Unique : public Item {
+
+public:
+    Unique(string description, int value, string rarity);
+    void setValue(int newValue);
+
+
+};
 #endif /*ITEM_H_*/
