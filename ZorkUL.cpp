@@ -1,18 +1,24 @@
 #include <iostream>
+
 #include "mainwindow.h"
+#include "ZorkUL.h"
+
 #include <QApplication>
 #include <QTimer>
 
+//NAMESPACE
 using namespace std;
-#include "ZorkUL.h"
+
 
 int main(int argc, char *argv[]) {
 
     QApplication a(argc, argv);
     MainWindow w;
-   // w.resize(1500, 800);
-    w.setWindowState(Qt::WindowMaximized);
+
+    w.resize(1400, 700);
+    //w.setWindowState(Qt::WindowMaximized);
     w.show();
+
     return a.exec();
     ZorkUL temp;
     temp.play();
@@ -24,95 +30,96 @@ ZorkUL::ZorkUL() {
 }
 
 void ZorkUL::createRooms()  {
-    Room *a, *b, *c, *d, *e, *f, *g, *h, *i, *j, *k, *l, *m, *n, *o, *p;
+    Room *pond, *hall, *dining, *kitchen, *salon, *library, *terrace, *study, *stables, *garden, *armory, *staff, *guards, *redTower, *gallery, *blackTower;
 
-    a = new Room("Pond");
-        a->addItem(new Common("Swiss Knife", 20, "Common"));
-        a->addItem(new Common("Axe", 10, "Common"));
+    pond = new Room("Pond");
+            pond->addCommon(new Common("Swiss Knife", 20, "Common"));
+            pond->addCommon(new Common("Axe", 10, "Common"));
 
-    b = new Room("Hall");
-        b->addItem(new Unique("Mona Lisa", 750, "Unique"));
-        b->addItem(new Common("Candlestick", 15, "Common"));
+        hall = new Room("Hall");
+            hall->addUnique(new Unique("Mona Lisa", 750,  "Unique"));
+            hall->addCommon(new Common("Candlestick", 15, "Common"));
 
-    c = new Room("Dining");
-        c->addItem(new Rare("Weinglut Schloss", 340, "Rare"));
-        c->addItem(new Common("Silver Cutlery", 60, "Common"));
+        dining = new Room("Dining");
+            dining->addRare(new Rare("Weinglut Schloss", 340,  "Rare"));
+            dining->addCommon(new Common("Silver Cutlery", 60, "Common"));
 
-    d = new Room("Kitchen");
-        d->addItem(new Common("Chef's Knife", 80, "Common"));
+        kitchen = new Room("Kitchen");
+            kitchen->addCommon(new Common("Chef's Knife", 80,  "Common"));
 
-    e = new Room("Salon");
-        e->addItem(new Unique("Violin 'Ex-Carrodus'", 800, "Unique"));
-        e->addItem(new Rare("Porcelain Tea-Set", 240, "Rare"));
-        e->addItem(new Common("Ceramic Vase", 90, "Common"));
+        salon = new Room("Salon");
+            salon->addUnique(new Unique("Violin 'Ex-Carrodus'", 800,  "Unique"));
+            salon->addRare(new Rare("Porcelain Tea-Set", 240,  "Rare"));
+            salon->addCommon(new Common("Ceramic Vase", 90, "Common"));
 
-    f = new Room("Library");
-        f->addItem(new Common("10 Gulden Coins", 10, "Common"));
-        f->addItem(new Unique("Frauenbildnis", 820, "Unique"));
-        f->addItem(new Rare("Bronze Atlas", 290, "Rare"));
+        library = new Room("Library");
+            library->addCommon(new Common("10 Gulden Coins", 10, "Common"));
+            library->addUnique(new Unique("Frauenbildnis", 820, "Unique"));
+            library->addRare(new Rare("Bronze Atlas", 290, "Rare"));
 
-    g = new Room("Terrace");
+        terrace = new Room("Terrace");
 
-    h = new Room("Study");
-        h->addItem(new Rare("Map of Mattersburg", 190, "Rare"));
-        h->addItem(new Rare("Lord's Wax Seal Stamp", 380, "Rare"));
-        h->addItem(new Common("Coin Purse", 55, "Common"));
+        study= new Room("Study");
+            study->addRare(new Rare("Map of Mattersburg", 190, "Rare"));
+            study->addRare(new Rare("Lord's Wax Seal Stamp", 380,  "Rare"));
+            study->addCommon(new Common("Coin Purse", 55, "Common"));
 
-    i = new Room("Stables");
-        i->addItem(new Common("Horseshoe", 10, "Common"));
-        i->addItem(new Common("Horseshoe", 10, "Common"));
+        stables = new Room("Stables");
+            stables->addCommon(new Common("Horseshoe", 10,  "Common"));
+            stables->addCommon(new Common("Horseshoe", 10, "Common"));
 
-    j = new Room("Garden");
+        garden = new Room("Garden");
 
-    k = new Room("Armory");
-        k->addItem(new Rare("Kasket", 240, "Rare"));
-        k->addItem(new Unique("Lord's boots", 630, "Unique"));
-        k->addItem(new Rare("Bayonet", 420, "Rare"));
-        k->addItem(new Unique("Cavalry Sabre", 890, "Unique"));
+        armory = new Room("Armory");
+            armory->addRare(new Rare("Kasket", 240, "Rare"));
+            armory->addUnique(new Unique("Lord's boots", 630, "Unique"));
+            armory->addRare(new Rare("Bayonet", 420, "Rare"));
+            armory->addUnique(new Unique("Cavalry Sabre", 890, "Unique"));
 
-    l = new Room("Staff");
-        l->addItem(new Common("5 Gulden Coins", 5, "Common"));
-        l->addItem(new Common("Spoon", 1, "Common"));
-        l->addItem(new Unique("Brooch", 750, "Unique"));
+        staff = new Room("Staff");
+            staff->addCommon(new Common("5 Gulden Coins", 5, "Common"));
+            staff->addCommon(new Common("Spoon", 1, "Common"));
+            staff->addUnique(new Unique("Brooch", 750, "Unique"));
 
-    m = new Room("Guards");
-        m->addItem(new Common("Almdudler", 45, "Common"));
+        guards = new Room("Guards");
+            guards->addCommon(new Common("Almdudler", 45, "Common"));
 
-    n = new Room("Red Tower");
-        n->addItem(new Rare("Bayonet", 360, "Rare"));
-        n->addItem(new Rare("Broken Sabre", 220, "Rare"));
-        n->addItem(new Common("Leather Gloves", 60, "Common"));
+        redTower = new Room("Red Tower");
+            redTower->addRare(new Rare("Bayonet", 360, "Rare"));
+            redTower->addRare(new Rare("Broken Sabre", 220, "Rare"));
+            redTower->addCommon(new Common("Leather Gloves", 60, "Common"));
 
-    o = new Room("Gallery");
-        o->addItem(new Unique("The Young Hare", 690, "Unique"));
-        o->addItem(new Unique("Gemstone Bouquet", 990, "Unique"));
-        o->addItem(new Unique("The Last Judgement", 870, "Unique"));
+        gallery = new Room("Gallery");
+            gallery->addUnique(new Unique("The Young Hare", 690, "Unique"));
+            gallery->addUnique(new Unique("Gemstone Bouquet", 990, "Unique"));
+            gallery->addUnique(new Unique("The Last Judgement", 870, "Unique"));
 
-    p = new Room("Black Tower");
-        p->addItem(new Rare("120 Gulden Coins", 120, "Rare"));
-        p->addItem(new Common("Wine", 20, "Common"));
-        p->addItem(new Rare("Bayonet", 260, "Rare"));
+        blackTower = new Room("Black Tower");
+            blackTower->addRare(new Rare("120 Gulden Coins", 120, "Rare"));
+            blackTower->addCommon(new Common("Wine", 20, "Common"));
+            blackTower->addRare(new Rare("Bayonet", 260, "Rare"));
+
 
 //             (N, E, S, W)
-    a->setExits(b, NULL, NULL, o);
-    b->setExits(NULL, c, a, NULL);
-    c->setExits(l, NULL, d, b);
-    d->setExits(c, NULL, e, NULL);
-    e->setExits(d, f, NULL, NULL);
-    f->setExits(NULL, h, g, e);
-    g->setExits(f, NULL, NULL, NULL);
-    h->setExits(i, NULL, NULL, f);
-    i->setExits(NULL, NULL, h, j);
-    j->setExits(k, i, NULL, NULL);
-    k->setExits(NULL,NULL, j, NULL);
-    l->setExits(NULL, NULL, c, m);
-    m->setExits(NULL,l, NULL, NULL);
-    n->setExits(o, a, NULL, NULL);
-    o->setExits(p, NULL, o, NULL);
-    p->setExits(NULL,NULL, o, NULL);
+            pond->setExits(hall, NULL, NULL, redTower);
+            hall->setExits(NULL, dining, pond, NULL);
+            dining->setExits(staff, NULL, kitchen, hall);
+            kitchen->setExits(dining, NULL, salon, NULL);
+            salon->setExits(kitchen, library, NULL, NULL);
+            library->setExits(NULL, study, terrace, salon);
+            terrace->setExits(library, NULL, NULL, NULL);
+            study->setExits(stables, NULL, NULL, library);
+            stables->setExits(NULL, NULL, study, garden);
+            garden->setExits(armory, stables, NULL, NULL);
+            armory->setExits(NULL, NULL, garden, NULL);
+            staff->setExits(NULL, NULL, dining, guards);
+            guards->setExits(NULL, staff, NULL, NULL);
+            redTower->setExits(gallery, pond, NULL, NULL);
+            gallery->setExits(blackTower, NULL, redTower, NULL);
+            blackTower->setExits(NULL, NULL, gallery, NULL);
 
-        currentRoom = a;
-}
+            currentRoom = pond;
+    }
 
 //  Main play routine.  Loops until end of play.
 
@@ -136,16 +143,25 @@ void ZorkUL::play() {
     cout << "end" << endl;
 }
 
-void ZorkUL::printWelcome() {
-    cout << "Servus! It's an absolutely dreadful day in Burgenland, Austria"<< endl;
-    cout << "Yet, its good as any other day for thieving! Today you've found"<< endl;
-    cout << "yourself at the entrance to Forchtenstein Castle, a looming shadow"<< endl;
-    cout << "over the poor folk of Forchenstein. Take everything you possibly can "<< endl;
-    cout << "and remember: be quick about it, you can't steal time! " << endl;
-    cout << endl;
-    cout << "You being you're journey at the ";
-    cout << currentRoom->longDescription() << endl;
-    cout << "Good Luck";
+string ZorkUL::printWelcome() {
+    string welcome = "Servus! It's an absolutely dreadful day in Burgenland, Austria\n"
+                     "Yet, its good as any other day for thieving! Today you've found\n"
+                     "yourself at the entrance to Forchtenstein Castle, a looming shadow\n"
+                     "over the poor folk of Forchenstein. Take everything you possibly can\n"
+                     "and remember: be quick about it, you can't steal time!\n "
+                     "You begin your journey at the " +currentRoom->longDescription() + "\n"
+                     "Good Luck!";
+    return welcome;
+
+
+   // cout << "Servus! It's an absolutely dreadful day in Burgenland, Austria"<< endl;
+   // cout << "Yet, its good as any other day for thieving! Today you've found"<< endl;
+    //cout << "yourself at the entrance to Forchtenstein Castle, a looming shadow"<< endl;
+    //cout << "over the poor folk of Forchenstein. Take everything you possibly can "<< endl;
+    //cout << "and remember: be quick about it, you can't steal time! " << endl;
+    //cout << "You begin your journey at the ";
+    //cout << currentRoom->longDescription() << endl;
+    //cout << "Good Luck";
 }
 
 /**

@@ -1,49 +1,91 @@
 #include "item.h"
+#include "Room.h"
 
-
-// Constructor, can specify name, monetary value and its rarity
-Item::Item (string inDescription, int value, string inRarity) {
+//ITEM CLASS DEFINITIONS
+Item::Item (string inDescription, int inValue, string inRarity) {
     description = inDescription;
-    setValue(value);
+    value = inValue;
     rarity = inRarity;
 }
 
-//setter for value
 void Item::setValue(int inValue)
 {
     if (inValue > 9999 || inValue < 0)
        cout << "value invalid, must be 0<value<9999" ;
     else
-        value = inValue;
+       value = inValue;
 }
 
-//The grand total after the player picks up their items. Will be used for the progress bar
-void Item::sumTotal(int value)
-{
-    int total = getTotal();
-    total += value;
-
+int Item::getValue() {
+    return value;
 }
-//getter for the item name
+
+
 string Item::getShortDescription()
 {
     return description;
 }
-//getter for a string consisting of the item's attricbutes
-string Item::getFullDescription()
+
+string Item::getLongDescription()
 {
-    return description + ", " + to_string(value) +" gulden, " + rarity;
+    return " item(s), " + description + ".\n";
 }
 
-//getter for the total
-int Item::getTotal()
-{
-    return total;
-}
-
-//getter for the item rarity
 string Item::getRarity()
 {
     return rarity;
 }
 
+void Item::setRarity(string itemRarity)
+{
+    rarity = itemRarity;
+}
+
+string Item::printOutVector()
+{
+    return "base";
+}
+
+// REQUIREMENT TEMPLATE FUNCTION = DONE
+template <typename T>
+T addToVector(vector <T> pickedItems, T item) {
+    pickedItems.push_back(item);
+}
+
+
+// COMMON CLASS DEFINITIONS
+Common::Common(string name, int value, string rarity) : Item(name, value, rarity)
+{
+
+}
+
+
+string Common::printOutVector()
+{
+    return "animal";
+}
+
+
+
+// RARE CLASS DEFINITIONS
+Rare::Rare(string name, int value, string rarity) : Item(name, value, rarity)
+{
+
+}
+
+string Rare::printOutVector()
+{
+    return "table";
+}
+
+
+// UNIQUE CLASS DEFINITIONS
+Unique::Unique(string name, int value, string rarity) : Item(name, value, rarity)
+{
+
+}
+
+string Unique::printOutVector()
+{
+    return "whatever";
+}
