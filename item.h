@@ -6,66 +6,72 @@
 #include <iostream>
 #include <vector>
 
+//make a template for thid vector TEMPLATE FUNCTION DONE!
 using namespace std;
+using std::string;
 
-// Each Item will have a name, value and rarity.
-// Value of each item will be added up to the grand total
-// Rarity of each item will determine which wordle the player will do!
-// Total will be updated every time the player picks up and successfully finishes a wordle.
+
+//REQUIREMENT ABSTRACT CLASS DONE
 
 class Item {
 
-protected:
-
+private:
+    //name of item
     string description;
-    string fullDescription;
-    int value = 0;
+    //outputs a formatted string with all the details
+    string longDescription;
+    //monetary value
+    int value;
+    //displays its rarity
     string rarity;
-    int total = 0;
+    // the total money collected for every item picked
+    int total;
 
 public:
-
-    Item (string description, int value, string rarity);
-//DESTRUCTOR
-    virtual ~Item();
+     static vector <Item> pickedUp;
+    Item (string , int , string );
     string getShortDescription();
-    string getFullDescription();
+    string getLongDescription();
     int getValue();
-    int getTotal();
+    void setValue(int);
     string getRarity();
-
-//VIRTUAL FUNCTION
-    virtual void setValue(int newValue);
-    void setTotal(int newTotal);
-    void sumTotal(int value);
+    void setRarity(string);
+    // THESE 2 WILL BE IN ZORKUL
+    //void addToTotal(int);
+    //void findTotal();
+    //  REQUIREMENT VIRTUAL FUNCTION = DONE
+    virtual string printOutVector();
 };
 
-//INHERITANCE
-class Common : public Item {
+// I will make ZorkUL friend to each subclass so it can access protected and private members
+// REQUIREMENT FRIENDSHIP = DONE
 
+// COMMON ITEMS
+class Common : public Item
+{
+    friend class ZorkUl;
 public:
-    Common(string description, int value, string rarity);
-    void setValue(int newValue);
-
+    Common(string, int, string);
+    string printOutVector();
 
 };
 
-
-class Rare : public Item {
-
+// RARE ITEMS
+class Rare : public Item
+{
+    friend class ZorkUL;
 public:
-    Rare(string description, int value, string rarity);
-    void setValue(int newValue);
-
+    Rare(string, int, string);
+    string printOutVector();
 };
 
-
-class Unique : public Item {
-
+// UNIQUE ITEMS
+class Unique : public Item
+{
+    friend class ZorkUL;
 public:
-    Unique(string description, int value, string rarity);
-    void setValue(int newValue);
-
-
+    Unique(string, int, string);
+    string printOutVector();
 };
+
 #endif /*ITEM_H_*/
