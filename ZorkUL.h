@@ -15,11 +15,12 @@ using namespace std;
 //CREATE A POINTER FUNCTION THAT IGNORES CASES FOR THE OTHER FUNCTIONS
 
 class ZorkUL {
+    friend class MainWindow;
 private:
     Parser parser;
     Room *currentRoom;
     void createRooms();
-    void printWelcome();
+    string printWelcome();
     bool processCommand(Command command);
     void printHelp();
     void goRoom(Command command);
