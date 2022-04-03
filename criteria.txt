@@ -1,10 +1,10 @@
-Virtual functions = done (to be merged)
+Virtual functions = done 
 
 template classes = done (to be merged)
 
 Multiple inheritance = not yet
 
-namespaces = not yet
+namespaces = done (to be merged)
 
 Programmer defined exceptions =  done (to be merged)
 
@@ -28,17 +28,17 @@ C++ References = done
 
 Pointers = done
 
-Inheritance = done (to be merged)
+Inheritance = done 
 
 Destructors = done
 
-Memory management = note yet
+Memory management = not yet
 
 Header files (inclusion guards) = done
 
 Arrays and pointers = done
 
-Friendship = done (to be merged)
+Friendship = done 
 
 Global variables = done
 
