@@ -2,7 +2,7 @@ Virtual functions = done
 
 template classes = done (to be merged)
 
-Multiple inheritance = not yet
+Multiple inheritance = done (to be merged)
 
 namespaces = done (to be merged)
 
