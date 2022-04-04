@@ -31,5 +31,4 @@ Week 7 Update: Back to coding, will try and improve the necessary updates from w
 
 Week 8 and 9 Update: Working on UI and improving functionality of code. Really need to focus on getting all the requirements into my code. but first get the base functionality of the code to work perfectly.
 
-As of now:
-Inheritance, virtual functions, namespaces, pointers, references, destructors, header files, private/public/static are included.
+Completed Requirements are listed in criteria.txt
