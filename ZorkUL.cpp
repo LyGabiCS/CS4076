@@ -1,13 +1,23 @@
 #include <iostream>
+#include <algorithm>
+#include <vector>
 
 #include "mainwindow.h"
 #include "ZorkUL.h"
+#include "Wordle.h"
+#include "exception.h"
 
 #include <QApplication>
 #include <QTimer>
 
-//NAMESPACE
+//USER DEFINED NAMESPACE
+using namespace exception;
 using namespace std;
+using std::vector;
+
+
+vector <Item> playerInventory;
+int total = 0;
 
 
 int main(int argc, char *argv[]) {
@@ -16,255 +26,223 @@ int main(int argc, char *argv[]) {
     MainWindow w;
 
     w.resize(1400, 700);
-    //w.setWindowState(Qt::WindowMaximized);
     w.show();
-
+    QTimer::singleShot(420000, &a, SLOT(quit()));
     return a.exec();
-    ZorkUL temp;
-    temp.play();
-    return 0;
+
 }
 
-ZorkUL::ZorkUL() {
+ZorkUL::ZorkUL()
+{
     createRooms();
 }
 
-void ZorkUL::createRooms()  {
-    Room *pond, *hall, *dining, *kitchen, *salon, *library, *terrace, *study, *stables, *garden, *armory, *staff, *guards, *redTower, *gallery, *blackTower;
+ZorkUL::~ZorkUL()
+{
+    for (int i = 0; i < availableRooms.size(); i++) {
+        delete availableRooms[i];
+    }
+}
+
+
+void ZorkUL::createRooms()
+{
+    Room *pond, * hall, * dining, * kitchen, * salon, * library, * terrace, * study, *stables, * garden, * armory, * staff, * guards, * redTower, * gallery, * blackTower;
 
     pond = new Room("Pond");
-            pond->addCommon(new Common("Swiss Knife", 20, "Common"));
-            pond->addCommon(new Common("Axe", 10, "Common"));
-
-        hall = new Room("Hall");
-            hall->addUnique(new Unique("Mona Lisa", 750,  "Unique"));
-            hall->addCommon(new Common("Candlestick", 15, "Common"));
-
-        dining = new Room("Dining");
-            dining->addRare(new Rare("Weinglut Schloss", 340,  "Rare"));
-            dining->addCommon(new Common("Silver Cutlery", 60, "Common"));
-
-        kitchen = new Room("Kitchen");
-            kitchen->addCommon(new Common("Chef's Knife", 80,  "Common"));
-
-        salon = new Room("Salon");
-            salon->addUnique(new Unique("Violin 'Ex-Carrodus'", 800,  "Unique"));
-            salon->addRare(new Rare("Porcelain Tea-Set", 240,  "Rare"));
-            salon->addCommon(new Common("Ceramic Vase", 90, "Common"));
-
-        library = new Room("Library");
-            library->addCommon(new Common("10 Gulden Coins", 10, "Common"));
-            library->addUnique(new Unique("Frauenbildnis", 820, "Unique"));
-            library->addRare(new Rare("Bronze Atlas", 290, "Rare"));
-
-        terrace = new Room("Terrace");
-
-        study= new Room("Study");
-            study->addRare(new Rare("Map of Mattersburg", 190, "Rare"));
-            study->addRare(new Rare("Lord's Wax Seal Stamp", 380,  "Rare"));
-            study->addCommon(new Common("Coin Purse", 55, "Common"));
-
-        stables = new Room("Stables");
-            stables->addCommon(new Common("Horseshoe", 10,  "Common"));
-            stables->addCommon(new Common("Horseshoe", 10, "Common"));
-
-        garden = new Room("Garden");
-
-        armory = new Room("Armory");
-            armory->addRare(new Rare("Kasket", 240, "Rare"));
-            armory->addUnique(new Unique("Lord's boots", 630, "Unique"));
-            armory->addRare(new Rare("Bayonet", 420, "Rare"));
-            armory->addUnique(new Unique("Cavalry Sabre", 890, "Unique"));
-
-        staff = new Room("Staff");
-            staff->addCommon(new Common("5 Gulden Coins", 5, "Common"));
-            staff->addCommon(new Common("Spoon", 1, "Common"));
-            staff->addUnique(new Unique("Brooch", 750, "Unique"));
-
-        guards = new Room("Guards");
-            guards->addCommon(new Common("Almdudler", 45, "Common"));
-
-        redTower = new Room("Red Tower");
-            redTower->addRare(new Rare("Bayonet", 360, "Rare"));
-            redTower->addRare(new Rare("Broken Sabre", 220, "Rare"));
-            redTower->addCommon(new Common("Leather Gloves", 60, "Common"));
-
-        gallery = new Room("Gallery");
-            gallery->addUnique(new Unique("The Young Hare", 690, "Unique"));
-            gallery->addUnique(new Unique("Gemstone Bouquet", 990, "Unique"));
-            gallery->addUnique(new Unique("The Last Judgement", 870, "Unique"));
-
-        blackTower = new Room("Black Tower");
-            blackTower->addRare(new Rare("120 Gulden Coins", 120, "Rare"));
-            blackTower->addCommon(new Common("Wine", 20, "Common"));
-            blackTower->addRare(new Rare("Bayonet", 260, "Rare"));
+    pond->addItem(new Item("Knife", 20, "Common"));
+    pond->addItem(new Item("Axe", 10, "Common"));
+    availableRooms.push_back(pond);
 
 
-//             (N, E, S, W)
-            pond->setExits(hall, NULL, NULL, redTower);
-            hall->setExits(NULL, dining, pond, NULL);
-            dining->setExits(staff, NULL, kitchen, hall);
-            kitchen->setExits(dining, NULL, salon, NULL);
-            salon->setExits(kitchen, library, NULL, NULL);
-            library->setExits(NULL, study, terrace, salon);
-            terrace->setExits(library, NULL, NULL, NULL);
-            study->setExits(stables, NULL, NULL, library);
-            stables->setExits(NULL, NULL, study, garden);
-            garden->setExits(armory, stables, NULL, NULL);
-            armory->setExits(NULL, NULL, garden, NULL);
-            staff->setExits(NULL, NULL, dining, guards);
-            guards->setExits(NULL, staff, NULL, NULL);
-            redTower->setExits(gallery, pond, NULL, NULL);
-            gallery->setExits(blackTower, NULL, redTower, NULL);
-            blackTower->setExits(NULL, NULL, gallery, NULL);
+    hall = new Room("Hall");
+    hall->addItem(new Item("Painting", 750, "Unique"));
+    hall->addItem(new Item("Candlestick", 15, "Common"));
+    availableRooms.push_back(hall);
 
-            currentRoom = pond;
-    }
+    dining = new Room("Dining");
+    dining->addItem(new Item("Vase", 340, "Rare"));
+    dining->addItem(new Item("Cutlery", 60, "Common"));
+    availableRooms.push_back(dining);
 
-//  Main play routine.  Loops until end of play.
+    kitchen = new Room("Kitchen");
+    kitchen->addItem(new Item("Knife", 80, "Common"));
+    availableRooms.push_back(kitchen);
 
-void ZorkUL::play() {
-    printWelcome();
+    salon = new Room("Salon");
+    salon->addItem(new Item("Violin", 800, "Unique"));
+    salon->addItem(new Item("Porcelain", 240, "Rare"));
+    salon->addItem(new Item("Flute", 90, "Common"));
+    availableRooms.push_back(salon);
 
-    // Enter the main command loop.  Here we repeatedly read commands and
-    // execute them until the ZorkUL game is over.
+    library = new Room("Library");
+    library->addItem(new Item("Coins", 10, "Common"));
+    library->addItem(new Item("Statue", 820, "Unique"));
+    library->addItem(new Item("Atlas", 290, "Rare"));
+    availableRooms.push_back(library);
 
-    bool finished = false;
-    while (!finished) {
-        // Create pointer to command and give it a command.
-        Command* command = parser.getCommand();
-        // Pass dereferenced command and check for end of game.
-        finished = processCommand(*command);
-        // Free the memory allocated by "parser.getCommand()"
-        //   with ("return new Command(...)")
-        delete command;
-    }
-    cout << endl;
-    cout << "end" << endl;
+    terrace = new Room("Terrace");
+    availableRooms.push_back(terrace);
+
+    study = new Room("Study");
+    study->addItem(new Item("Map", 190, "Rare"));
+    study->addItem(new Item("Seal", 380, "Rare"));
+    study->addItem(new Item("Purse", 55, "Common"));
+    availableRooms.push_back(study);
+
+    stables = new Room("Stables");
+    stables->addItem(new Item("Horseshoe", 10, "Common"));
+    stables->addItem(new Item("Horseshoe", 10, "Common"));
+    availableRooms.push_back(stables);
+
+    garden = new Room("Garden");
+    availableRooms.push_back(garden);
+
+    armory = new Room("Armory");
+    armory->addItem(new Item("Kasket", 240, "Rare"));
+    armory->addItem(new Item("Boots", 630, "Unique"));
+    armory->addItem(new Item("Bayonet", 420, "Rare"));
+    armory->addItem(new Item("Sabre", 890, "Unique"));
+    availableRooms.push_back(armory);
+
+    staff = new Room("Staff");
+    staff->addItem(new Item("5 Gulden Coins", 5, "Common"));
+    staff->addItem(new Item("Spoon", 1, "Common"));
+    staff->addItem(new Item("Brooch", 750, "Unique"));
+    availableRooms.push_back(staff);
+
+    guards = new Room("Guards");
+    guards->addItem(new Item("Wine", 45, "Common"));
+    availableRooms.push_back(guards);
+
+    redTower = new Room("Red Tower");
+    redTower->addItem(new Item("Bayonet", 360, "Rare"));
+    redTower->addItem(new Item("Sabre", 220, "Rare"));
+    redTower->addItem(new Item("Gloves", 60, "Common"));
+    availableRooms.push_back(redTower);
+
+    gallery = new Room("Gallery");
+    gallery->addItem(new Item("Bowl", 690, "Unique"));
+    gallery->addItem(new Item("Painting", 990, "Unique"));
+    gallery->addItem(new Item("Mosaic", 870, "Unique"));
+    availableRooms.push_back(gallery);
+
+    blackTower = new Room("Black Tower");
+    blackTower->addItem(new Item("Coins", 120, "Rare"));
+    blackTower->addItem(new Item("Wine", 20, "Common"));
+    blackTower->addItem(new Item("Bayonet", 260, "Rare"));
+    availableRooms.push_back(blackTower);
+
+
+
+    //             (N, E, S, W)
+    pond->setExits(hall, NULL, NULL, redTower);
+
+    hall->setExits(NULL, dining, pond, NULL);
+
+    dining->setExits(staff, NULL, kitchen, hall);
+
+    kitchen->setExits(dining, NULL, salon, NULL);
+
+    salon->setExits(kitchen, library, NULL, NULL);
+
+    library->setExits(NULL, study, terrace, salon);
+
+    terrace->setExits(library, NULL, NULL, NULL);
+
+    study->setExits(stables, NULL, NULL, library);
+
+    stables->setExits(NULL, NULL, study, garden);
+
+    garden->setExits(armory, stables, NULL, NULL);
+
+    armory->setExits(NULL, NULL, garden, NULL);
+
+    staff->setExits(NULL, NULL, dining, guards);
+
+    guards->setExits(NULL, staff, NULL, NULL);
+
+    redTower->setExits(gallery, pond, NULL, NULL);
+
+    gallery->setExits(blackTower, NULL, redTower, NULL);
+
+    blackTower->setExits(NULL, NULL, gallery, NULL);
+
+
+    this->currentRoom = pond;
 }
 
-string ZorkUL::printWelcome() {
-    string welcome = "Servus! It's an absolutely dreadful day in Burgenland, Austria\n"
-                     "Yet, its good as any other day for thieving! Today you've found\n"
-                     "yourself at the entrance to Forchtenstein Castle, a looming shadow\n"
-                     "over the poor folk of Forchenstein. Take everything you possibly can\n"
-                     "and remember: be quick about it, you can't steal time!\n "
-                     "You begin your journey at the " +currentRoom->longDescription() + "\n"
-                     "Good Luck!";
-    return welcome;
-
-
-   // cout << "Servus! It's an absolutely dreadful day in Burgenland, Austria"<< endl;
-   // cout << "Yet, its good as any other day for thieving! Today you've found"<< endl;
-    //cout << "yourself at the entrance to Forchtenstein Castle, a looming shadow"<< endl;
-    //cout << "over the poor folk of Forchenstein. Take everything you possibly can "<< endl;
-    //cout << "and remember: be quick about it, you can't steal time! " << endl;
-    //cout << "You begin your journey at the ";
-    //cout << currentRoom->longDescription() << endl;
-    //cout << "Good Luck";
+string ZorkUL::printWelcome()
+{
+    return "Welcome to Zork! Your goal is to loot as many rooms in the given time! "
+        "Beware of the time limit and tough Wordle puzzles on your journey through "
+        "Forchenstein Castle! GOOD LUCK!";
 }
 
-/**
- * Given a command, process (that is: execute) the command.
- * If this command ends the ZorkUL game, true is returned, otherwise false is
- * returned.
- */
-bool ZorkUL::processCommand(Command command) {
-    if (command.isUnknown()) {
-        cout << "Come on now, no one's got time for that!"<< endl;
-        return false;
-    }
+string ZorkUL::printHelp()
+{
+    return "Buttons:\n"
+        "Use Arrowpad to move rooms\n"
+        "Use Map button to show Map\n"
+        "Timer will countdown your game time\n";
+}
 
-    string commandWord = command.getCommandWord();
-    if (commandWord.compare("info") == 0)
-        printHelp();
+string ZorkUL::goRoom(string direction)
+{
+      currentRoom = getCurrentRoom();
+      Room* nextRoom;
+      currentRoom = currentRoom->nextRoom(direction);
 
-    else if (commandWord.compare("map") == 0)
-        {
-        cout << "[Black Tower]  [Guards] --- [Staff]                           " << endl;
-        cout << "     |                         ¦                              " << endl;
-        cout << "     |                         ¦                              " << endl;
-        cout << "[Gallery]       [Hall] --- [Dining]     [Armory]              " << endl;
-        cout << "     |             ¦           ¦            ¦                 " << endl;
-        cout << "     |             ¦           ¦            ¦                 " << endl;
-        cout << "[Red Tower] --- [Pond]     [Kitchen]    [Garden] --- [Stables]" << endl;
-        cout << "                               ¦                         ¦    " << endl;
-        cout << "                               ¦                         ¦    " << endl;
-        cout << "                            [Salon] --- [Library] --- [Study] " << endl;
-        cout << "                                            ¦                 " << endl;
-        cout << "                                            ¦                 " << endl;
-        cout << "                                        [Terrace]             " << endl;
-        }
-
-    else if (commandWord.compare("go") == 0)
-        goRoom(command);
-
-    //need a function to ignore cases, will be very helpful for the take commend REMEMBER!!!!!!!
-    else if (commandWord.compare("take") == 0)
+    if (nextRoom == NULL)
     {
-        if (!command.hasSecondWord()) {
-        cout << "you need to pick something pal"<< endl;
-        }
-        else
-         if (command.hasSecondWord()) {
-        cout << "you're trying to take " + command.getSecondWord() << endl;
-        int location = currentRoom->isItemInRoom(command.getSecondWord());
-        if (location  < 0 )
-            cout << "what sort of thief are you, it's not in this room!" << endl;
-        else
-            cout << "found it!" << endl;
-            cout << "index number " << + location << endl;
-            cout << endl;
-            cout << currentRoom->longDescription() << endl;
-        }
+        return "There is no room this way!";
     }
-
-    if (commandWord.compare("progress") == 0) {
-        if (command.hasSecondWord())
-            cout << "give me a second will ya"<< endl;
-        else
-            return true; // write a function that specifies the room details
-    }
-}
-// COMMANDS
-void ZorkUL::printHelp() {
-    cout << "valid inputs are; " << endl;
-    parser.showCommands();
-
-}
-
-void ZorkUL::goRoom(Command command) {
-    if (!command.hasSecondWord()) {
-        cout << "incomplete input"<< endl;
-        return;
-    }
-
-    string direction = command.getSecondWord();
-
-    // Try to leave current room.
-    Room* nextRoom = currentRoom->nextRoom(direction);
-
-    if (nextRoom == NULL)
-        cout << "incomplete input"<< endl;
-    else {
-        currentRoom = nextRoom;
-        cout << currentRoom->longDescription() << endl;
-    }
-}
-
-string ZorkUL::go(string direction) {
-    //Make the direction lowercase
-    //transform(direction.begin(), direction.end(), direction.begin(),:: tolower);
-    //Move to the next room
-    Room* nextRoom = currentRoom->nextRoom(direction);
-    if (nextRoom == NULL)
-        return("direction null");
     else
     {
         currentRoom = nextRoom;
-        return currentRoom->longDescription();
-      }
-  }
+        return currentRoom->getDescription();
+    }
+}
+
+string ZorkUL::currentItems()
+{
+    return currentRoom->displayItem();
+}
+
+string ZorkUL::addToInventory(string itemName)
+{
+    int index = currentRoom->isItemInRoom(itemName);
+    Item item = currentRoom->getItemsInRoom().at(index);
+    int money = item.getValue();
+    total += money;
+    playerInventory.push_back(item);
+    currentRoom->takeItem(itemName);
+    return "You took " + itemName;
+}
+
+
+string ZorkUL::lowerCase(string word)
+{
+    string uppercase = word;
+    std::transform(uppercase.begin(), uppercase.end(), uppercase.begin(), ::tolower);
+    return uppercase;
+}
+
+Room* ZorkUL::getCurrentRoom()
+{
+    return currentRoom;
+}
+
+int ZorkUL::collectedMoney()
+{
+    int endTotal = 0;
+    for(int i = 0; i < playerInventory.size(); i++)
+    {
+        endTotal += playerInventory[i].getValue();
+        return endTotal;
+    }
+}
+
 
 
 
