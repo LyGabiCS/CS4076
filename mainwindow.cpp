@@ -139,8 +139,6 @@ void MainWindow::on_Take_Button_clicked()
     }
 }
 
-
-
 void MainWindow::on_Help_Button_clicked()
 {
     ui->TextWindow->append(QString::fromStdString(zork->printHelp()));
