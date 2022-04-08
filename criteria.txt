@@ -1,28 +1,26 @@
 Virtual functions = done 
 
-template classes = done (to be merged)
+Multiple Inheritance = done
 
-Multiple inheritance = done (to be merged)
+namespaces = done 
 
-namespaces = done (to be merged)
-
-Programmer defined exceptions =  done (to be merged)
+Programmer defined exceptions =  done
 
 Unions = not yet
 
-Operator overloading = not yet
+Operator overloading = done
 
-Abstract classes = done (to be merged)
+Abstract classes = nope
 
 Copy constructors (deep , shallow copy) = not yet
 
 Bit structures = not yet
 
-Advanced pre-processor directives = not yet
+Advanced pre-processor directives = done
 
-C++ Object Construction Sequence = done (to be merged)
+C++ Object Construction Sequence = nope
 
-Initializer List = not yet
+Initializer List = done
 
 C++ References = done 
 
@@ -32,7 +30,7 @@ Inheritance = done
 
 Destructors = done
 
-Memory management = not yet
+Memory management = done
 
 Header files (inclusion guards) = done
 
