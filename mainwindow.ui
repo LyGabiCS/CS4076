@@ -1,4 +1,4 @@
-<<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
@@ -222,6 +222,22 @@ font: 700 12pt &quot;Script MT Bold&quot;;</string>
       <y>240</y>
       <width>371</width>
       <height>121</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgb(28, 46, 74)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="WordleWindow">
+    <property name="geometry">
+     <rect>
+      <x>1040</x>
+      <y>380</y>
+      <width>271</width>
+      <height>241</height>
      </rect>
     </property>
     <property name="styleSheet">
