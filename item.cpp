@@ -42,6 +42,8 @@ void Item::setRarity(string newRarity)
     rarity = newRarity;
 }
 
+
+//OPERATOR OVERLOADING
 bool Item::operator==(Item i)
 {
     if (this->getName() == i.getName())
