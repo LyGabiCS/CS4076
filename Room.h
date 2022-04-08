@@ -21,6 +21,7 @@ private:
 
 
 public:
+
     //DEFAULT CONSTRUCTOR
     Room(string = "Castle");
 
