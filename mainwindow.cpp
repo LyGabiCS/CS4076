@@ -3,27 +3,35 @@
 #include "ZorkUL.h"
 #include "Room.h"
 #include "item.h"
+#include "Wordle.h"
 
 #include <QMessageBox>
 #include <QString>
 #include <QObject>
-#include <QListView>
+#include <QInputDialog>
+#include <QTextStream>
+
+Wordle wordle;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , zork(new ZorkUL())
 {
-    ui->setupUi(this);
-    ui->statusbar->showMessage("Try to loot as fast as possible!");
-    // I will set map to hidden so the user can set it visible/invisible at their will
-    ui->Map->setVisible(0);
 
-   // Set the list widget to the current room items
+    ui->setupUi(this);
+    wordle.loadWords("words5.txt");
+
+    ui->statusbar->showMessage("Try to loot as fast as possible!");
+
+    //ui->RoomWindow->setText(QString::fromStdString(zork->currentItems()));
+
+    ui->Map->setVisible(0);
 
     ui->TextWindow->append(QString::fromStdString(zork->printWelcome()));
 
-    time.setHMS(0,1,0);
+    ui->CoinCollected->setValue(1);
+
+    time.setHMS(0,7,0);
     ui->TimeLeft->setText(time.toString("hh::mm::ss"));
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(timerUpdate()));
@@ -48,10 +56,20 @@ void MainWindow::stringtoQ(string s)
     QString qstr = QString::fromStdString(s);
 }
 
+/*
+void MainWindow::playWordle()
+{
+    QString solution = QString::fromStdString(wordle.pickRandom());
+    QString input = QInputDialog::getText((this),  "Wordle", "Enter a 5-letter word: ");
+
+    wordle.compareWords(input.toStdString(), solution.toStdString());
+}
+*/
+
 void MainWindow::on_North_clicked()
 {
     direction = "north";
-    ui->TextWindow->append(QString::fromStdString(zork->go(direction)));
+    ui->TextWindow->append(QString::fromStdString(zork->goRoom(direction)));
 
 
 }
@@ -60,8 +78,7 @@ void MainWindow::on_North_clicked()
 void MainWindow::on_South_clicked()
 {
     direction = "south";
-    zork->go(direction);
-    ui->TextWindow->append(QString::fromStdString(zork->go(direction)));
+    ui->TextWindow->append(QString::fromStdString(zork->goRoom(direction)));
 
 }
 
@@ -69,8 +86,7 @@ void MainWindow::on_South_clicked()
 void MainWindow::on_East_clicked()
 {
     direction = "east";
-    zork->go(direction);
-    ui->TextWindow->append(QString::fromStdString(zork->go(direction)));
+    ui->TextWindow->append(QString::fromStdString(zork->goRoom(direction)));
 
 }
 
@@ -78,8 +94,7 @@ void MainWindow::on_East_clicked()
 void MainWindow::on_West_clicked()
 {
     direction = "west";
-    zork->go(direction);
-    ui->TextWindow->append(QString::fromStdString(zork->go(direction)));
+    ui->TextWindow->append(QString::fromStdString(zork->goRoom(direction)));
 
 }
 
@@ -110,12 +125,24 @@ void MainWindow::on_Map_Button_clicked()
     }
 }
 
-
-
-
-
 void MainWindow::on_Take_Button_clicked()
 {
+    QString item = QInputDialog::getText(this, "Pick an Item", "Item name: ");
+    string name  = item.toStdString();
+    if(wordle.winWordle() == true)
+    {
+    zork->addToInventory(name);
+    }
+    else
+    {
 
+    }
+}
+
+
+
+void MainWindow::on_Help_Button_clicked()
+{
+    ui->TextWindow->append(QString::fromStdString(zork->printHelp()));
 }
 
