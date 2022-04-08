@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
@@ -22,8 +22,8 @@ font: 700 12pt &quot;Script MT Bold&quot;;</string>
    <widget class="QPushButton" name="Quit">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>540</y>
+      <x>40</x>
+      <y>530</y>
       <width>151</width>
       <height>71</height>
      </rect>
@@ -39,8 +39,8 @@ font: 700 12pt &quot;Script MT Bold&quot;;</string>
    <widget class="QPushButton" name="Map_Button">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>540</y>
+      <x>40</x>
+      <y>440</y>
       <width>151</width>
       <height>71</height>
      </rect>
@@ -56,7 +56,7 @@ font: 700 12pt &quot;Script MT Bold&quot;;</string>
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>200</y>
+      <y>160</y>
       <width>101</width>
       <height>71</height>
      </rect>
@@ -77,8 +77,8 @@ font: 700 12pt &quot;Script MT Bold&quot;;</string>
    <widget class="QPushButton" name="East">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>300</y>
+      <x>290</x>
+      <y>240</y>
       <width>101</width>
       <height>71</height>
      </rect>
@@ -93,8 +93,8 @@ font: 700 12pt &quot;Script MT Bold&quot;;</string>
    <widget class="QPushButton" name="West">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>300</y>
+      <x>90</x>
+      <y>240</y>
       <width>101</width>
       <height>71</height>
      </rect>
@@ -110,7 +110,7 @@ font: 700 12pt &quot;Script MT Bold&quot;;</string>
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>400</y>
+      <y>320</y>
       <width>101</width>
       <height>71</height>
      </rect>
@@ -183,31 +183,52 @@ font: 700 12pt &quot;Script MT Bold&quot;;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QListWidget" name="Inventory">
-    <property name="geometry">
-     <rect>
-      <x>1035</x>
-      <y>240</y>
-      <width>311</width>
-      <height>311</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: rgb(28, 46, 74)
-</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="Take_Button">
     <property name="geometry">
      <rect>
-      <x>1070</x>
-      <y>570</y>
-      <width>251</width>
-      <height>31</height>
+      <x>280</x>
+      <y>440</y>
+      <width>151</width>
+      <height>71</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgb(28, 46, 74)</string>
     </property>
     <property name="text">
      <string>Take Item</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Help_Button">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>530</y>
+      <width>151</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgb(28, 46, 74)</string>
+    </property>
+    <property name="text">
+     <string>Help!</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="RoomWindow">
+    <property name="geometry">
+     <rect>
+      <x>990</x>
+      <y>240</y>
+      <width>371</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgb(28, 46, 74)</string>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

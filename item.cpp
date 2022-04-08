@@ -1,91 +1,105 @@
 #include "item.h"
-#include "Room.h"
+#include <iostream>
+using namespace std;
 
-//ITEM CLASS DEFINITIONS
-Item::Item (string inDescription, int inValue, string inRarity) {
-    description = inDescription;
-    value = inValue;
-    rarity = inRarity;
-}
-
-void Item::setValue(int inValue)
+//INITIALIZER LIST
+Item::Item(string name, int value, string rarity)
+    : name{ name }, value{ value }, rarity{rarity}
 {
-    if (inValue > 9999 || inValue < 0)
-       cout << "value invalid, must be 0<value<9999" ;
-    else
-       value = inValue;
+
 }
-
-int Item::getValue() {
-    return value;
-}
-
-
-string Item::getShortDescription()
+//DESTRUCTOR
+Item::~Item()
 {
-    return description;
+    delete this;
 }
 
-string Item::getLongDescription()
+string Item::getName()
 {
-    return " item(s), " + description + ".\n";
+    return this->name;
+}
+
+int Item::getValue()
+{
+    return this->value;
 }
 
 string Item::getRarity()
 {
-    return rarity;
+    return this->rarity;
 }
 
-void Item::setRarity(string itemRarity)
+void Item::setName(string newName)
 {
-    rarity = itemRarity;
+    name = newName;
 }
-
-string Item::printOutVector()
+void Item::setValue(int newValue)
 {
-    return "base";
+    value = newValue;
+}
+void Item::setRarity(string newRarity)
+{
+    rarity = newRarity;
 }
 
-// REQUIREMENT TEMPLATE FUNCTION = DONE
-template <typename T>
-T addToVector(vector <T> pickedItems, T item) {
-    pickedItems.push_back(item);
+bool Item::operator==(Item i)
+{
+    if (this->getName() == i.getName())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 
-// COMMON CLASS DEFINITIONS
+
 Common::Common(string name, int value, string rarity) : Item(name, value, rarity)
 {
-
 }
 
-
-string Common::printOutVector()
+void Common::setValue(int inValue)
 {
-    return "animal";
+
+    if (inValue > 100 || inValue < 1)
+       cout << "Common Items are worth between 1 and 100 guldens";
+    else
+       value = inValue;
 }
 
 
 
-// RARE CLASS DEFINITIONS
+
 Rare::Rare(string name, int value, string rarity) : Item(name, value, rarity)
 {
 
 }
 
-string Rare::printOutVector()
+void Rare::setValue(int inValue)
 {
-    return "table";
+
+    if (inValue > 400 || inValue < 100)
+       cout << "Rare Items are worth between 100 and 400 guldens";
+    else
+       value = inValue;
 }
 
 
-// UNIQUE CLASS DEFINITIONS
+
+
 Unique::Unique(string name, int value, string rarity) : Item(name, value, rarity)
 {
 
 }
-
-string Unique::printOutVector()
+void Unique::setValue(int inValue)
 {
-    return "whatever";
+
+    if (inValue > 1000 || inValue < 400)
+       cout << "Rare Items are worth between 100 and 400 guldens";
+    else
+       value = inValue;
 }
+
+
