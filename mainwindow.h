@@ -17,13 +17,17 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+    friend class ZorkUL;
 
 public:
 
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void inputToCommand(string );
+
+
+    void inputToCommand(string);
     void stringtoQ(string);
+    void playWordle();
     QTime time;
 
 
@@ -46,6 +50,8 @@ private slots:
     void on_Take_Button_clicked();
 
     void timerUpdate();
+
+    void on_Help_Button_clicked();
 
 private:
 
