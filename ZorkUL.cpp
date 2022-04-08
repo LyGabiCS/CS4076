@@ -12,10 +12,11 @@
 
 //USER DEFINED NAMESPACE
 using namespace exception;
+
 using namespace std;
 using std::vector;
 
-
+//GLOBAL VARIABLE
 vector <Item> playerInventory;
 int total = 0;
 
@@ -37,6 +38,7 @@ ZorkUL::ZorkUL()
     createRooms();
 }
 
+//DESTRUCTOR
 ZorkUL::~ZorkUL()
 {
     for (int i = 0; i < availableRooms.size(); i++) {
@@ -187,20 +189,25 @@ string ZorkUL::printHelp()
         "Timer will countdown your game time\n";
 }
 
+//USER DEFINED EXCEPTION HANDLING
 string ZorkUL::goRoom(string direction)
 {
-      currentRoom = getCurrentRoom();
-      Room* nextRoom;
-      currentRoom = currentRoom->nextRoom(direction);
-
-    if (nextRoom == NULL)
-    {
-        return "There is no room this way!";
-    }
-    else
-    {
-        currentRoom = nextRoom;
-        return currentRoom->getDescription();
+    currentRoom = getCurrentRoom();
+    Room* nextRoom;
+    currentRoom = currentRoom->nextRoom(direction);
+    try {
+        if (nextRoom == NULL)
+        {
+            return "There is no room this way!";
+        }
+        else
+        {
+            currentRoom = nextRoom;
+            return currentRoom->getDescription();
+        }
+        //REFERENCE
+    }  catch (MyException& e) {
+        return e.what();
     }
 }
 
@@ -235,7 +242,8 @@ Room* ZorkUL::getCurrentRoom()
 
 int ZorkUL::collectedMoney()
 {
-    int endTotal = 0;
+    //REFERENCE
+    int &endTotal = total;
     for(int i = 0; i < playerInventory.size(); i++)
     {
         endTotal += playerInventory[i].getValue();

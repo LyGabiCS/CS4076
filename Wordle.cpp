@@ -3,6 +3,10 @@
 #include <iostream>
 #include <fstream>
 
+//PREPROCESSOR DIRECTIVE - MACRO
+#define MAXLETTERS 5
+#define NAIVE_STR(x) #x
+
 using std::ifstream;
 using namespace std;
 
@@ -39,7 +43,7 @@ string Wordle::compareWords(string guess, string solution)
     string b = solution;
     string clue = ""; // NULL FOR NOW
 
-    for(int i = 0; i < 5; i++)
+    for(int i = 0; i < MAXLETTERS; i++)
     {
         if(a[i] == b[position])
         {
@@ -93,6 +97,7 @@ bool Wordle::winWordle()
             output = compareWords(input, solution);
             if(ifGuessed(output) == false){
             count++;
+
             }
             else
             {

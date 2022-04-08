@@ -27,6 +27,7 @@ public:
     string lowerCase(string);
     Room* getCurrentRoom();
     int collectedMoney();
+    
 
 
 

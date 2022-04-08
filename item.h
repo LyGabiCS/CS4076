@@ -22,6 +22,8 @@ public:
     string getRarity();
 
     void setName(string);
+
+//VIRTUAL FUNCTION
     virtual void setValue(int);
     void setRarity(string);
 
@@ -30,7 +32,7 @@ public:
 
 
 
-// COMMON ITEMS
+//INTERITANCE
 class Common : public Item
 {
 

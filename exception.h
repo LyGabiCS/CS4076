@@ -13,7 +13,7 @@ namespace exception
     public:
 
 //INLINE EXCEPTION HANDLER
-const char * noRoom() throw () {return "There is no room here!";}
+inline const char * noRoom() throw () {return "There is no room here!";}
 
     };
 }

@@ -11,6 +11,8 @@ using std::vector;
 class Wordle {
 
 public:
+    //STATIC CLASS MEMBERS
+
     static void loadWords(string);
     static string pickRandom();
     static string compareWords(string, string);

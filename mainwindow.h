@@ -62,6 +62,5 @@ private:
     QProgressBar *progress;
     ZorkUL *zork;
     string direction;
-
 };
 #endif // MAINWINDOW_H
